@@ -1,19 +1,22 @@
 @startuml
 
-autonumber
+hide footbox
 
-A -> B: step
+participant A as ":Client"
+participant B as ":Caissier"
+participant C as ":Caisse"
+participant Tapis as ":Tapis"
+participant Article as ":Article"
 
+A -> B: arrive
 activate B
-B -> C: step
+A -> Tapis: deposerArticle
+activate Tapis
 
-activate C
-C --> C: action
-C -> B: step
-deactivate C
-
-B -> A: step
-deactivate B
-
+loop "Pour chaque article"
+  B -> Tapis: prendreArticle
+  B-> C: scan(a)
+  activate C
+  
 
 @enduml
